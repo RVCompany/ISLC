@@ -18,7 +18,7 @@ public class Account implements java.io.Serializable {
 
 	@Column(unique = true)
 	private String email;
-	
+
 	@JsonIgnore
 	private String password;
 
@@ -27,7 +27,7 @@ public class Account implements java.io.Serializable {
     protected Account() {
 
 	}
-	
+
 	public Account(String email, String password, String role) {
 		this.email = email;
 		this.password = password;
