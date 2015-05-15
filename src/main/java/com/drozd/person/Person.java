@@ -8,8 +8,10 @@ import javax.persistence.*;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "person")
-/*@NamedQuery(name = Person.FIND_BY_EMAIL, query = "select a from Account a where a.email = :email")*/
+@NamedQuery(name = Person.FIND_BY_ACCOUNT, query = "select p from Person p where p.account = :account")
 public class Person implements java.io.Serializable {
+
+    public static final String FIND_BY_ACCOUNT = "Person.findByAccount";
 
     @Id
     @GeneratedValue

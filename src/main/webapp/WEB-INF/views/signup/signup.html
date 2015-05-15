@@ -30,9 +30,6 @@
                 <span class="help-block" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Incorrect password</span>
             </div>
         </div>
-
-
-
         <div class="form-group" th:classappend="${#fields.hasErrors('firstName')}? 'has-error'">
             <label for="firstName" class="col-lg-2 control-label">First Name</label>
             <div class="col-lg-10">
@@ -47,11 +44,6 @@
                 <span class="help-block" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Incorrect Last Name</span>
             </div>
         </div>
-
-
-
-
-
         <div class="form-group">
             <div class="col-lg-offset-2 col-lg-10">
                 <button type="submit" class="btn btn-default">Sign up</button>
