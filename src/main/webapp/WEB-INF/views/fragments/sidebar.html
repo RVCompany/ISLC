@@ -8,12 +8,13 @@
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
         <!-- Sidebar user panel -->
-        <div class="user-panel">
+        <div class="user-panel" th:if="${#authorization.expression('isAuthenticated()')}">
             <div class="pull-left image">
                 <img src="../../../resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
             </div>
-            <div class="pull-left info" th:if="${#authorization.expression('isAuthenticated()')}">
-                <span class="hidden-xs" th:if="${person != null}" th:text="${person.firstName +' '+ person.lastName }"> </span>
+            <div class="pull-left info">
+                <span class="hidden-xs" th:if="${person != null}"
+                      th:text="${person.firstName +' '+ person.lastName }"> </span>
             </div>
         </div>
         <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -30,7 +31,7 @@
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-files-o"></i>
-                    <span>Layout Options</span>
+                    <span>Предмети лізингу</span>
                     <span class="label label-primary pull-right">4</span>
                 </a>
                 <ul class="treeview-menu">
@@ -39,6 +40,7 @@
                     <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
                     <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed
                         Sidebar</a></li>
+                    <li><a href="subjects/add"><i class="fa fa-plus-circle"></i> Додати</a></li>
                 </ul>
             </li>
             <li><a href="#"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
