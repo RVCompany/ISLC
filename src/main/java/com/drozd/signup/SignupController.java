@@ -2,6 +2,7 @@ package com.drozd.signup;
 
 import javax.validation.Valid;
 
+import com.drozd.person.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,9 @@ public class SignupController {
 
 	@Autowired
 	private AccountRepository accountRepository;
+
+    @Autowired
+    private PersonRepository personRepository;
 	
 	@Autowired
 	private UserService userService;
@@ -35,6 +39,8 @@ public class SignupController {
 			return SIGNUP_VIEW_NAME;
 		}
 		Account account = accountRepository.save(signupForm.createAccount());
+        personRepository.save(signupForm.createPerson(account));
+
 		userService.signin(account);
         // see /WEB-INF/i18n/messages.properties and /WEB-INF/views/homeSignedIn.html
         MessageHelper.addSuccessAttribute(ra, "signup.success");
