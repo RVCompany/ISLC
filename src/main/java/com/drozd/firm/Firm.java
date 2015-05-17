@@ -20,12 +20,7 @@ import java.util.Set;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "firm")
-
 public class Firm implements java.io.Serializable {
-
-
-    public static final String FIND_BY_ACCOUNT = "Person.findByAccount";
-
     @Id
     @GeneratedValue
     private Long id;
@@ -48,16 +43,11 @@ public class Firm implements java.io.Serializable {
     @Column
     private Integer phoneNumber;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "persons")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "firm")
     private Set<Person> persons;
 
     @Column
     private String site;
-
-
-    public Set<Person> getPersons() {
-        return this.persons;
-    }
 
     public Firm(String name, String site, Integer phoneNumber, Date dateOfReestr, Integer address, String EDRPOU_Code, String shortName) {
         this.name = name;
@@ -123,6 +113,10 @@ public class Firm implements java.io.Serializable {
 
     public void setPhoneNumber(Integer phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public Set<Person> getPersons() {
+        return this.persons;
     }
 
     public void setPersons(Set<Person> persons) {

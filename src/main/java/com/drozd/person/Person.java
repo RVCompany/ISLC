@@ -37,9 +37,8 @@ public class Person implements java.io.Serializable {
     @Column
     private Integer address;
 
-    @Column
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "firm_id", nullable = false)
+    @JoinColumn(name = "firm_id", nullable = true)
     private Firm firm;
 
     @OneToOne
@@ -47,17 +46,14 @@ public class Person implements java.io.Serializable {
             name = "account_id", unique = true, nullable = false, updatable = false)
     private Account account;
 
-
     protected Person() {
     }
 
-
-    private Person(String firstName, String lastName, Account account) {
+    public Person(String firstName, String lastName, Account account) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.account = account;
     }
-
 
     public Person(String firstName, String lastName, String passport, Date dateOfBirth, Integer phoneNumber, Integer address, Firm firm, Account account) {
         this.firstName = firstName;
