@@ -46,7 +46,7 @@ public class Person implements java.io.Serializable {
             name = "account_id", unique = true, nullable = false, updatable = false)
     private Account account;
 
-    protected Person() {
+    public Person() {
     }
 
     public Person(String firstName, String lastName, Account account) {
