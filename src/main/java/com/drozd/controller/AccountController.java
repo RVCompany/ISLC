@@ -18,12 +18,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Secured("ROLE_USER")
 class AccountController {
 
-    private AccountRepository accountRepository;
-
     @Autowired
-    public AccountController(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
-    }
+    private AccountRepository accountRepository;
 
     @RequestMapping(value = "account/current", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)

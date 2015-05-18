@@ -7,7 +7,9 @@ import static org.mockito.Mockito.*;
 import java.util.Collection;
 
 import com.drozd.persistence.models.Account;
+import com.drozd.persistence.models.Person;
 import com.drozd.persistence.repository.AccountRepository;
+import com.drozd.persistence.repository.PersonRepository;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -28,6 +30,9 @@ public class UserServiceTest {
 	@Mock
 	private AccountRepository accountRepositoryMock;
 
+    @Mock
+    private PersonRepository personRepositoryMock;
+
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 
@@ -37,6 +42,7 @@ public class UserServiceTest {
 		userService.initialize();
 		// assert
 		verify(accountRepositoryMock, times(2)).save(any(Account.class));
+		verify(personRepositoryMock, times(2)).save(any(Person.class));
 	}
 
 	@Test

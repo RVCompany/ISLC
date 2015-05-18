@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 
 import com.drozd.persistence.models.Account;
 import com.drozd.persistence.repository.AccountRepository;
+import com.drozd.persistence.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.*;
@@ -13,15 +14,23 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.*;
 
+import static com.drozd.bulider.PersonHelper.*;
+
 public class UserService implements UserDetailsService {
 	
 	@Autowired
 	private AccountRepository accountRepository;
+
+    @Autowired
+	private PersonRepository personRepository;
 	
 	@PostConstruct	
 	protected void initialize() {
-		accountRepository.save(new Account("user", "demo", "ROLE_USER"));
-		accountRepository.save(new Account("admin", "admin", "ROLE_ADMIN"));
+		Account admin = accountRepository.save(getAdminAccount());
+		Account user = accountRepository.save(getDefaultUserAccount());
+
+        personRepository.save(getAdminPerson(admin));
+        personRepository.save(getDefaultUserPerson(user));
 	}
 	
 	@Override
