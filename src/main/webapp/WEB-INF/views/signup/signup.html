@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Signup</title>
+    <title>Реєстрація</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
     <link href="../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}" />
@@ -19,7 +19,7 @@
         <div th:replace="fragments/alert :: alert (type='danger', message='Form contains errors. Please try again.')">Alert</div>
     </th:block>
     <fieldset>
-        <legend>Please Sign Up</legend>
+        <legend>Зареєструйтесь будь-ласка</legend>
         <div class="form-group" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
             <label for="email" class="col-lg-2 control-label">Email</label>
             <div class="col-lg-10">
@@ -28,40 +28,40 @@
             </div>
         </div>
         <div class="form-group" th:classappend="${#fields.hasErrors('password')}? 'has-error'">
-            <label for="password" class="col-lg-2 control-label">Password</label>
+            <label for="password" class="col-lg-2 control-label">Пароль</label>
             <div class="col-lg-10">
                 <input type="password" class="form-control" id="password" placeholder="Password" th:field="*{password}"/>
-                <span class="help-block" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Incorrect password</span>
+                <span class="help-block" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Невірний формат паролю</span>
             </div>
         </div>
         <div class="form-group" th:classappend="${#fields.hasErrors('firstName')}? 'has-error'">
-            <label for="firstName" class="col-lg-2 control-label">First Name</label>
+            <label for="firstName" class="col-lg-2 control-label">Ім'я</label>
             <div class="col-lg-10">
-                <input type="text" class="form-control" id="firstName" placeholder="First Name (placeholder)" th:field="*{firstName}"/>
-                <span class="help-block" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Incorrect First Name</span>
+                <input type="text" class="form-control" id="firstName" placeholder="First Name" th:field="*{firstName}"/>
+                <span class="help-block" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Невірний формат імені</span>
             </div>
         </div>
         <div class="form-group" th:classappend="${#fields.hasErrors('lastName')}? 'has-error'">
-            <label for="lastName" class="col-lg-2 control-label">Last Name</label>
+            <label for="lastName" class="col-lg-2 control-label">Прізвище</label>
             <div class="col-lg-10">
-                <input type="text" class="form-control" id="lastName" placeholder="Password" th:field="*{lastName}"/>
-                <span class="help-block" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Incorrect Last Name</span>
+                <input type="text" class="form-control" id="lastName" placeholder="Last Name" th:field="*{lastName}"/>
+                <span class="help-block" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Невірний формат прізвища</span>
             </div>
         </div>
         <div class="form-group">
-            <label for="dateOfBirth" class="col-lg-2 control-label">Last Name</label>
+            <label for="dateOfBirth" class="col-lg-2 control-label">Дата народження</label>
             <div class="col-lg-10">
                 <input type="text" class="form-control" id="dateOfBirth" placeholder="dateOfBirth" th:field="*{dateOfBirth}"/>
             </div>
         </div>
         <div class="form-group">
             <div class="col-lg-offset-2 col-lg-10">
-                <button type="submit" class="btn btn-default">Sign up</button>
+                <button type="submit" class="btn btn-default">Зареєструватися</button>
             </div>
         </div>
         <div class="form-group">
             <div class="col-lg-offset-2 col-lg-10">
-                <p>Already have an account? <a href="signin" th:href="@{/signin}">Sign In</a></p>
+                <p>Ви вже зареєстровані? <a href="signin" th:href="@{/signin}">Увійти</a></p>
             </div>
         </div>
     </fieldset>
