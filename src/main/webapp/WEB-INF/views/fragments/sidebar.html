@@ -28,7 +28,7 @@
                     <li><a href="#"><i class="fa fa-circle-o"></i> Моя фірма</a></li>
                 </ul>
             </li>
-            <li class="treeview">
+            <li class="treeview" th:if="${#authorization.expression('isAuthenticated()')}">
                 <a href="#">
                     <i class="fa fa-car"></i>
                     <span>Предмети лізингу</span>
