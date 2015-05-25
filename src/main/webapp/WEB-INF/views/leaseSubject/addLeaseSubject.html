@@ -39,8 +39,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                General Form Elements
-                <small>Preview</small>
+                Додати предмет лізингу
             </h1>
         </section>
         <section class="content">
@@ -51,13 +50,28 @@
                         <!-- left column -->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1"
-                                       placeholder="Enter email"/>
+                                <label for="bodyType">Тип кузова</label>
+                                <input type="text" class="form-control" id="bodyType"
+                                       placeholder="Введіть тип кузова"/>
                             </div>
+
+                            <!-- select -->
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1"
+                                <label>Виберіть тип кузова</label>
+                                <select class="form-control">
+                                    <option>Седан</option>
+                                    <option>Хечбек</option>
+                                    <option>Універсал</option>
+                                    <option>Позашляховик</option>
+                                    <option>Купе</option>
+
+
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="brand">Password</label>
+                                <input type="text" class="form-control" id="exampleInputPassword1"
                                        placeholder="Password"/>
                             </div>
                             <div class="form-group">
