@@ -18,6 +18,9 @@ public class CarAttributeValue implements java.io.Serializable {
     @JoinColumn(name = "carAttributeId", nullable = true)
     private CarAttribute carAttribute;
 
+    @Column
+    private String attributeValue;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "car_carAttributeValue", catalog = "islc", joinColumns = {
             @JoinColumn(name = "carAttributeValueId", nullable = false, updatable = false) },
@@ -25,10 +28,12 @@ public class CarAttributeValue implements java.io.Serializable {
                     nullable = false, updatable = false) })
     private Set<Car> cars = new HashSet<>(0);
 
-    @Column
-    private String attributeValue;
-
     public CarAttributeValue() {
+    }
+
+    public CarAttributeValue(CarAttribute carAttribute, String attributeValue) {
+        this.carAttribute = carAttribute;
+        this.attributeValue = attributeValue;
     }
 
     public Long getCarAttributeValueId() {

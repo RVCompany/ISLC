@@ -15,18 +15,14 @@ public class CarAttribute implements java.io.Serializable {
     @Column
     private String attributeName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "personId", nullable = true)
-    private Person person;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "firmId", nullable = true)
-    private Firm firm;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "carAttribute")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "carAttribute")
     private Set<CarAttributeValue> values;
 
     public CarAttribute() {
+    }
+
+    public CarAttribute(String attributeName) {
+        this.attributeName = attributeName;
     }
 
     public Long getId() {
@@ -43,22 +39,6 @@ public class CarAttribute implements java.io.Serializable {
 
     public void setAttributeName(String attributeName) {
         this.attributeName = attributeName;
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
-
-    public Firm getFirm() {
-        return firm;
-    }
-
-    public void setFirm(Firm firm) {
-        this.firm = firm;
     }
 
     public Set<CarAttributeValue> getValues() {

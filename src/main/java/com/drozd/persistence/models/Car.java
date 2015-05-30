@@ -15,7 +15,7 @@ public class Car implements java.io.Serializable {
     private Long carId;
 
     @Column
-    private Double price;
+    private Integer price;
 
     @Column
     private boolean customs;
@@ -51,11 +51,11 @@ public class Car implements java.io.Serializable {
         this.carId = carId;
     }
 
-    public Double getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
