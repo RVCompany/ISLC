@@ -14,10 +14,10 @@ public class PersonHelper {
     }
 
     public static Account getAdminAccount(){
-        return new Account("admin", "admin", "ROLE_ADMIN");
+        return new Account("admin@admin.com", "admin", "ROLE_ADMIN");
     }
 
     public static Account getDefaultUserAccount(){
-        return new Account("user", "demo", "ROLE_USER");
+        return new Account("user@user.com", "demo", "ROLE_USER");
     }
 }

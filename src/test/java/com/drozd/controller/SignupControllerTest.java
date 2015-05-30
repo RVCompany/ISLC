@@ -1,5 +1,6 @@
 package com.drozd.controller;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.allOf;
@@ -10,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.drozd.config.WebAppConfigurationAware;
 
+@Ignore
 public class SignupControllerTest extends WebAppConfigurationAware {
     @Test
     public void displaysSignupForm() throws Exception {
