@@ -43,6 +43,17 @@ public class Car implements java.io.Serializable {
     public Car() {
     }
 
+    public Car(Integer price, boolean customs, Double fuelConsumption, Double enginePower, Integer race,
+               Set<CarAttributeValue> attributeValues, Person person) {
+        this.price = price;
+        this.customs = customs;
+        this.fuelConsumption = fuelConsumption;
+        this.enginePower = enginePower;
+        this.race = race;
+        this.attributeValues = attributeValues;
+        this.person = person;
+    }
+
     public Long getCarId() {
         return carId;
     }

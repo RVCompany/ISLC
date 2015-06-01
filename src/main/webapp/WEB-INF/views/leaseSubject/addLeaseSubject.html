@@ -48,7 +48,7 @@
             </th:block>
             <div class="box box-primary">
                 <!-- form start -->
-                <form role="form" th:object="${carDataForm}">
+                <form role="form" th:object="${carDataForm}" th:action="@{/leaseSubject/addLeaseSubject}" action="/leaseSubject/addLeaseSubject" method="post">
                     <div class="box-body">
                         <!-- left column -->
                         <div class="col-md-6">
@@ -84,8 +84,8 @@
                         <div class="col-md-6">
                             <div class="form-group" th:each="attribute : ${allAttributes}">
                                 <label th:text="${attribute.attributeName}"></label>
-                                <select class="form-control" >
-                                    <option th:each="value : ${attribute.values}" th:text="${value.attributeValue}">Седан</option>
+                                <select class="form-control" th:field="*{attributeValueIds[__${attribute.id}__]}">
+                                    <option th:each="value : ${attribute.values}" th:text="${value.attributeValue}" th:value="${value.carAttributeValueId}">Седан</option>
                                 </select>
                             </div>
                             <!--TODO: FIle upload-->

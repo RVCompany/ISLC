@@ -20,5 +20,11 @@ public class CarAttributeValueRepository {
 		entityManager.persist(carAttributeValue);
 		return carAttributeValue;
 	}
+
+    public CarAttributeValue getById(Long id) {
+        return entityManager.createNamedQuery(CarAttributeValue.FIND_BY_ID, CarAttributeValue.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
 	
 }

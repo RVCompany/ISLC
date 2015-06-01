@@ -7,7 +7,10 @@ import java.util.Set;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "carAttributeValue")
+@NamedQuery(name = CarAttributeValue.FIND_BY_ID, query = "select cav from CarAttributeValue cav where cav.id = :id")
 public class CarAttributeValue implements java.io.Serializable {
+
+    public static final String FIND_BY_ID = "CarAttributeValue.findById";
 
     @Id
     @GeneratedValue
