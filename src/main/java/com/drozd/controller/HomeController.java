@@ -96,9 +96,7 @@ public class HomeController {
             carAttributeValueRepository.save(carAttributeValue42);
             carAttributeValueRepository.save(carAttributeValue43);
             carAttributeValueRepository.save(carAttributeValue44);
-
-            return "home/homeSignedIn";
         }
-        return "home/homeNotSignedIn";
+        return "home/home";
     }
 }
