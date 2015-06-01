@@ -29,6 +29,11 @@ public class CarAttribute implements java.io.Serializable {
     public CarAttribute() {
     }
 
+    public CarAttribute(String attributeName, Set<CarAttributeValue> values) {
+        this.attributeName = attributeName;
+        this.values = values;
+    }
+
     public Long getId() {
         return id;
     }
