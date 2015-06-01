@@ -15,6 +15,12 @@ public class Car implements java.io.Serializable {
     private Long carId;
 
     @Column
+    private String brand;
+
+    @Column
+    private String model;
+
+    @Column
     private Integer price;
 
     @Column
@@ -28,6 +34,12 @@ public class Car implements java.io.Serializable {
 
     @Column
     private Integer race;
+
+    @Column
+    private Integer year;
+
+    @Column
+    private boolean inLease;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "personId", nullable = true)
@@ -43,13 +55,16 @@ public class Car implements java.io.Serializable {
     public Car() {
     }
 
-    public Car(Integer price, boolean customs, Double fuelConsumption, Double enginePower, Integer race,
-               Set<CarAttributeValue> attributeValues, Person person) {
+    public Car(String brand, String model, Integer price, boolean customs, Double fuelConsumption, Double enginePower,
+               Integer race, Integer year, Set<CarAttributeValue> attributeValues, Person person) {
+        this.brand = brand;
+        this.model = model;
         this.price = price;
         this.customs = customs;
         this.fuelConsumption = fuelConsumption;
         this.enginePower = enginePower;
         this.race = race;
+        this.year = year;
         this.attributeValues = attributeValues;
         this.person = person;
     }
@@ -60,6 +75,22 @@ public class Car implements java.io.Serializable {
 
     public void setCarId(Long carId) {
         this.carId = carId;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
     }
 
     public Integer getPrice() {
@@ -124,5 +155,21 @@ public class Car implements java.io.Serializable {
 
     public void setAttributeValues(Set<CarAttributeValue> attributeValues) {
         this.attributeValues = attributeValues;
+    }
+
+    public boolean isInLease() {
+        return inLease;
+    }
+
+    public void setInLease(boolean inLease) {
+        this.inLease = inLease;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
     }
 }

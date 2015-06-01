@@ -23,6 +23,9 @@ public class UserService implements UserDetailsService {
 
     @Autowired
 	private PersonRepository personRepository;
+
+    @Autowired
+    private CarAttributeValueService carAttributeValueService;
 	
 	@PostConstruct	
 	protected void initialize() {
@@ -31,6 +34,8 @@ public class UserService implements UserDetailsService {
 
         personRepository.save(getAdminPerson(admin));
         personRepository.save(getDefaultUserPerson(user));
+
+        carAttributeValueService.initAttributesAndValues();
 	}
 	
 	@Override

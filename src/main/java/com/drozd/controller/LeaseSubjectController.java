@@ -66,8 +66,9 @@ public class LeaseSubjectController {
     @ResponseStatus(value = HttpStatus.OK)
     public String leaseSubjectTable(Principal principal, Model model) {
         Person person = personService.getPersonByEmail(principal.getName());
-        model.addAttribute("person", person != null ? person : new Person());
+        model.addAttribute("person", person);
         model.addAttribute("sideTab", SideTab.LEASE_SUBJECT.getCode());
+        model.addAttribute("cars", carRepository.getCarsByPerson(person));
         return LEASE_SUBJECT_TABLE_VIEW;
     }
 
@@ -75,15 +76,16 @@ public class LeaseSubjectController {
     public String add(@Valid @ModelAttribute CarDataForm carDataForm, Errors errors, Model model, Principal principal) {
         Person person = personService.getPersonByEmail(principal.getName());
         model.addAttribute("sideTab", SideTab.LEASE_SUBJECT.getCode());
+        model.addAttribute("person", person);
         if (errors.hasErrors()) {
-            model.addAttribute("person", person);
             model.addAttribute("allAttributes", getAllAttributes());
             return ADD_LEASE_SUBJECT_VIEW;
         }
         List<String> attributeValueIds = carDataForm.getAttributeValueIds();
         Car car = carDataForm.createCar(carAttributeValueService.getValuesByIds(attributeValueIds), person);
         carRepository.save(car);
-        return "redirect:/";
+        model.addAttribute("cars", carRepository.getCarsByPerson(person));
+        return LEASE_SUBJECT_TABLE_VIEW;
     }
 
     private List<CarAttribute> getAllAttributes() {

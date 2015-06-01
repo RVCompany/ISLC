@@ -52,25 +52,41 @@
                     <div class="box-body">
                         <!-- left column -->
                         <div class="col-md-6">
-                            <div class="form-group has-feedback" th:classappend="${#fields.hasErrors('price')}? 'has-error'">
-                                <label>Ціна</label>
-                                <input type="text" class="form-control" placeholder="10000" th:field="*{price}"/>
-                                <span class="help-block" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Це поле не повинне бути пустим</span>
+                            <div class="form-group has-feedback" th:classappend="${#fields.hasErrors('brand')}? 'has-error'">
+                                <label>Марка автомобіля</label>
+                                <input type="text" class="form-control" placeholder="Tesla" th:field="*{brand}"/>
+                                <span class="help-block" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}">Це поле не повинне бути пустим</span>
+                            </div>
+                            <div class="form-group has-feedback" th:classappend="${#fields.hasErrors('model')}? 'has-error'">
+                                <label>Модель автомобіля</label>
+                                <input type="text" class="form-control" placeholder="Model S" th:field="*{model}"/>
+                                <span class="help-block" th:if="${#fields.hasErrors('model')}" th:errors="*{model}">Це поле не повинне бути пустим</span>
                             </div>
                             <div class="form-group has-feedback" th:classappend="${#fields.hasErrors('price')}? 'has-error'">
-                                <label>Розхід пального на 100 км.</label>
+                                <label>Ціна, грн.</label>
+                                <input type="text" class="form-control" placeholder="100000" th:field="*{price}"/>
+                                <span class="help-block" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Це поле не повинне бути пустим</span>
+                            </div>
+                            <div class="form-group has-feedback" th:classappend="${#fields.hasErrors('fuelConsumption')}? 'has-error'">
+                                <label>Розхід пального, л / 100 км</label>
                                 <input type="text" class="form-control" placeholder="10.0" th:field="*{fuelConsumption}"/>
                                 <span class="help-block" th:if="${#fields.hasErrors('fuelConsumption')}" th:errors="*{fuelConsumption}">Це поле не повинне бути пустим</span>
                             </div>
                             <div class="form-group has-feedback" th:classappend="${#fields.hasErrors('enginePower')}? 'has-error'">
-                                <label>Потужність двигуна</label>
+                                <label>Потужність двигуна, дм3</label>
                                 <input type="text" class="form-control" placeholder="2.0" th:field="*{enginePower}"/>
                                 <span class="help-block" th:if="${#fields.hasErrors('enginePower')}" th:errors="*{enginePower}">Це поле не повинне бути пустим</span>
                             </div>
                             <div class="form-group has-feedback" th:classappend="${#fields.hasErrors('price')}? 'has-error'">
-                                <label>Пробіг</label>
+                                <label>Пробіг, км</label>
                                 <input type="text" class="form-control" placeholder="100000" th:field="*{race}"/>
                                 <span class="help-block" th:if="${#fields.hasErrors('race')}" th:errors="*{race}">Це поле не повинне бути пустим</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Рік випуску</label>
+                                <select class="form-control" th:field="*{year}">
+                                    <option th:each="year : ${#numbers.sequence(1900,2015)}" th:text="${year}" th:value="${year}">2015</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <div class="checkbox form-control" style="border:0px">
@@ -100,7 +116,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Готово</button>
                     </div>
                 </form>
             </div>

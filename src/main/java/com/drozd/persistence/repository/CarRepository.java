@@ -2,11 +2,13 @@ package com.drozd.persistence.repository;
 
 import com.drozd.persistence.models.Car;
 import com.drozd.persistence.models.CarAttribute;
+import com.drozd.persistence.models.Person;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Repository
 @Transactional(readOnly = true)
@@ -20,5 +22,11 @@ public class CarRepository {
 		entityManager.persist(car);
 		return car;
 	}
+
+    public List<Car> getCarsByPerson(Person person) {
+        return entityManager.createQuery("select car from Car car where car.person = :person", Car.class)
+                .setParameter("person", person)
+                .getResultList();
+    }
 	
 }

@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -15,6 +16,14 @@ import java.util.Set;
 public class CarDataForm {
 
     private static final String NOT_BLANK_MESSAGE = "{notBlank.message}";
+
+    @NotBlank(message = NOT_BLANK_MESSAGE)
+    @Size(min = 1, max = 20)
+    private String brand;
+
+    @Size(min = 1, max = 20)
+    @NotBlank(message = NOT_BLANK_MESSAGE)
+    private String model;
 
     @NotNull
     @Min(0)
@@ -35,6 +44,8 @@ public class CarDataForm {
     @NotNull
     @Min(0)
     private Integer race;
+
+    private Integer year;
 
     private List<String> attributeValueIds = new ArrayList<>(20);
 
@@ -86,7 +97,31 @@ public class CarDataForm {
         this.attributeValueIds = attributeValueIds;
     }
 
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
     public Car createCar(Set<CarAttributeValue> attributeValues, Person person) {
-        return new Car(price, customs, fuelConsumption, enginePower, race, attributeValues, person);
+        return new Car(brand, model, price, customs, fuelConsumption, enginePower, race, year, attributeValues, person);
     }
 }
