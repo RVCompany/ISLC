@@ -19,7 +19,7 @@ import java.security.Principal;
 public class LeaseSubjectController {
 
     private final static String ADD_LEASE_SUBJECT_VIEW = "leaseSubject/addLeaseSubject";
-
+    private final static String LEASE_SUBJECT_TABLE_VIEW = "leaseSubject/leaseSubjectTable";
     @Autowired
     private PersonService personService;
 
@@ -27,7 +27,19 @@ public class LeaseSubjectController {
     @ResponseStatus(value = HttpStatus.OK)
     public String addLeaseSubject(Principal principal, Model model) {
         Person person = personService.getPersonByEmail(principal.getName());
-        model.addAttribute("person",  person != null ? person : new Person());
+        model.addAttribute("person", person != null ? person : new Person());
         return ADD_LEASE_SUBJECT_VIEW;
+
+    }
+
+
+
+
+        @RequestMapping(value = "/leaseSubjectTable", method = RequestMethod.GET)
+        @ResponseStatus(value = HttpStatus.OK)
+        public String leaseSubjectTable(Principal principal, Model model) {
+            Person person = personService.getPersonByEmail(principal.getName());
+            model.addAttribute("person",  person != null ? person : new Person());
+            return LEASE_SUBJECT_TABLE_VIEW;
     }
 }
