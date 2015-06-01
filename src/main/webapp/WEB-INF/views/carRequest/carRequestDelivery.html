@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Заявка на видачу майна</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'/>
+    <!-- Bootstrap 3.3.4 -->
+    <link href="../../../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <!-- FontAwesome 4.3.0 -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
+          type="text/css"/>
+    <!-- Ionicons 2.0.0 -->
+    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
+    <!-- Theme style -->
+    <link href="../../../resources/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css"/>
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link href="../../../resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css"/>
+    <!-- iCheck -->
+    <link href="../../../resources/plugins/iCheck/flat/blue.css" rel="stylesheet" type="text/css"/>
+    <!-- jvectormap -->
+    <link href="../../../resources/plugins/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css"/>
+    <!-- Date Picker -->
+    <link href="../../../resources/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css"/>
+    <!-- Daterange picker -->
+    <link href="../../../resources/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css"/>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="skin-blue sidebar-mini">
+<div class="wrapper">
+    <div th:replace="fragments/header :: header">Header</div>
+    <aside th:replace="fragments/sidebar :: sidebar">Header</aside>
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Додати заявку з видачі майна
+            </h1>
+        </section>
+        <section class="content">
+            <div class="box box-primary">
+                <!-- form start -->
+                <form role="form">
+                    <div class="box-body">
+                        <!-- left column -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Виберіть машину</label>
+                                <select class="form-control">
+                                    <option>Седан</option>
+                                    <option>Хечбек</option>
+                                    <option>Універсал</option>
+                                    <option>Позашляховик</option>
+                                    <option>Купе</option>
+                                </select>
+                            </div>
+
+
+                                <div class="form-group">
+                                    <label for="carPrice">Ціна автомобіля</label>
+                                    <input type="text" class="form-control" id="carPrice"
+                                           placeholder="Введіть ціну автомобіля"/>
+                                </div>
+
+
+                                    <div class="form-group">
+                                        <label for="avans">Авансовий платіж, %</label>
+                                        <input type="text" class="form-control" id="avans"
+                                               placeholder="Введіть авансовий платіж (у %)"/>
+                                    </div>
+
+                            <div class="form-group">
+                                <label for="procent">Вартість лізингу, % річних</label>
+                                <input type="text" class="form-control" id="procent"
+                                       placeholder="Введіть вартість користування лізингом (у %)"/>
+                            </div>
+
+
+
+
+                        </div>
+                        <!--/.col (left) -->
+
+                        <div class="col-md-6">
+                            <!-- form start -->
+
+
+
+                            <div class="form-group">
+                                <label for="remainder">Залишкова, викупна вартість предмету лізингу, %</label>
+                                <input type="text" class="form-control" id="remainder"
+                                       placeholder="Введіть залишкову вартість предмету лізингу (у %)"/>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>Тип графіка погашення</label>
+                                <select class="form-control">
+                                    <option>Регулярні постійні платежі (Ануїтет)</option>
+                                    <option>Регулярні платежі з постійним темпом зміни</option>
+                                    <option>Регулярні платежі з амортизацією боргу рівними частинами</option>
+                                </select>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>Періодичність платежу</label>
+                                <select class="form-control">
+                                    <option>Щомісяця</option>
+                                    <option>Щокварталу</option>
+                                    <option>Щороку</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!--/.col (right) -->
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">Опублікувати заявку</button>
+                        <button type="submit" class="btn btn-primary">Переглянути графік платежів</button>
+                    </div>
+
+                </form>
+            </div>
+            <!-- /.box -->
+        </section>
+        <!-- /.content -->
+    </div>
+</div>
+
+<!-- jQuery 2.1.4 -->
+<script src="../../../resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<!-- jQuery UI 1.11.2 -->
+<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.min.js" type="text/javascript"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+      $.widget.bridge('uibutton', $.ui.button);
+
+</script>
+<!-- Bootstrap 3.3.2 JS -->
+<script src="../../../resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<!-- daterangepicker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js" type="text/javascript"></script>
+<script src="../../../resources/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+<!-- datepicker -->
+<script src="../../../resources/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
+<!-- Slimscroll -->
+<script src="../../../resources/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<!-- AdminLTE App -->
+<script src="../../../resources/dist/js/app.min.js" type="text/javascript"></script>
+</body>
+</html>

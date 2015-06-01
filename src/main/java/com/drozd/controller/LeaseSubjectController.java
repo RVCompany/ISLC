@@ -1,8 +1,6 @@
 package com.drozd.controller;
 
 import com.drozd.forms.CarDataForm;
-import com.drozd.forms.SignupForm;
-import com.drozd.persistence.models.Account;
 import com.drozd.persistence.models.Car;
 import com.drozd.persistence.models.CarAttribute;
 import com.drozd.persistence.models.Person;
@@ -12,7 +10,6 @@ import com.drozd.persistence.repository.CarRepository;
 import com.drozd.service.CarAttributeValueService;
 import com.drozd.service.PersonService;
 import com.drozd.support.enums.SideTab;
-import com.drozd.support.web.MessageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.annotation.Secured;
@@ -23,8 +20,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.thymeleaf.expression.Messages;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -36,6 +31,7 @@ import java.util.List;
 public class LeaseSubjectController {
 
     private final static String ADD_LEASE_SUBJECT_VIEW = "leaseSubject/addLeaseSubject";
+    private final static String LEASE_SUBJECT_TABLE_VIEW = "leaseSubject/leaseSubjectTable";
 
     private static List<CarAttribute> allAttributes;
 
@@ -64,6 +60,15 @@ public class LeaseSubjectController {
         model.addAttribute("sideTab", SideTab.LEASE_SUBJECT.getCode());
 
         return ADD_LEASE_SUBJECT_VIEW;
+    }
+
+    @RequestMapping(value = "/leaseSubjectTable", method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public String leaseSubjectTable(Principal principal, Model model) {
+        Person person = personService.getPersonByEmail(principal.getName());
+        model.addAttribute("person", person != null ? person : new Person());
+        model.addAttribute("sideTab", SideTab.LEASE_SUBJECT.getCode());
+        return LEASE_SUBJECT_TABLE_VIEW;
     }
 
     @RequestMapping(value = "/addLeaseSubject", method = RequestMethod.POST)

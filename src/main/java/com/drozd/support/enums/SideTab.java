@@ -1,7 +1,9 @@
 package com.drozd.support.enums;
 
 public enum SideTab {
-    LEASE_SUBJECT(1);
+    LEASE_SUBJECT(1),
+    HOME(2),
+    REQUEST(3);
 
     private int code;
 

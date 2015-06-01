@@ -10,6 +10,7 @@ import com.drozd.persistence.models.Person;
 import com.drozd.persistence.repository.CarAttributeRepository;
 import com.drozd.persistence.repository.CarAttributeValueRepository;
 import com.drozd.persistence.repository.PersonRepository;
+import com.drozd.support.enums.SideTab;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,9 +36,8 @@ public class HomeController {
         if (principal != null) {
             Person person = personRepository.findByAccount(accountRepository.findByEmail(principal.getName()));
             model.addAttribute("person", person != null ? person : new Person());
-            return "home/homeSignedIn";
         }
-        return "home/homeNotSignedIn";
+        return "home/home";
     }
 
     /*TODO: Remake using import.sql*/

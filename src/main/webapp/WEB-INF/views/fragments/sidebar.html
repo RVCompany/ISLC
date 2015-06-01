@@ -28,27 +28,22 @@
                     <li><a href="#"><i class="fa fa-circle-o"></i> Моя фірма</a></li>
                 </ul>
             </li>
-            <li class="treeview" th:if="${#authorization.expression('isAuthenticated()')}" th:classappend="${sideTab = '1'}? 'active'">
+            <li class="treeview" th:if="${#authorization.expression('isAuthenticated()')}" th:classappend="${sideTab = '1'}? 'active' : ''">
                 <a href="#">
                     <i class="fa fa-car"></i>
                     <span>Предмети лізингу</span>
-                    <span class="label label-primary pull-right">4</span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-car"></i> Top Navigation</a></li>
-                    <li><a href="#"><i class="fa fa-car"></i> Boxed</a></li>
-                    <li><a href="#"><i class="fa fa-car"></i> Fixed</a></li>
-                    <li><a href="#"><i class="fa fa-car"></i> Collapsed
-                        Sidebar</a></li>
+                    <li><a href="/leaseSubject/leaseSubjectTable"><i class="fa fa-car"></i> Мої авто</a></li>
                     <li><a href="/leaseSubject/addLeaseSubject"><i class="fa fa-plus-circle"></i> Додати</a></li>
                 </ul>
             </li>
-            <li class="treeview">
+            <li class="treeview" th:classappend="${sideTab = '3'}? 'active'">
                 <a href="#">
                     <i class="fa fa-book"></i> <span> Мої документи</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="treeview">
+                    <li class="treeview" th:classappend="${sideTab = '3'}? 'active' : ''">
                         <a href="#">
                             <i class="fa fa-book"></i>
                             <span> Заявки на видачу майна</span>
@@ -59,7 +54,7 @@
                             <li><a href="#"><i class="fa fa-car"></i> Fixed</a></li>
                             <li><a href="#"><i class="fa fa-car"></i> Collapsed
                                 Sidebar</a></li>
-                            <li><a href="#"><i class="fa fa-plus-circle"></i> Додати</a></li>
+                            <li><a href="/carRequest/carRequestDelivery"><i class="fa fa-plus-circle"></i> Додати</a></li>
                         </ul>
                     </li>
 
