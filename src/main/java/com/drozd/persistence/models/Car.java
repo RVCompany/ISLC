@@ -53,7 +53,7 @@ public class Car implements java.io.Serializable {
     private Set<CarAttributeValue> attributeValues = new HashSet<>(0);
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "car")
-    private Set<CarRequestDelivery> requests;
+    private Set<CarDeliveryRequest> requests;
 
     public Car() {
     }
@@ -176,12 +176,11 @@ public class Car implements java.io.Serializable {
         this.year = year;
     }
 
-    public Set<CarRequestDelivery> getRequests() {
-
+    public Set<CarDeliveryRequest> getRequests() {
         return requests;
     }
 
-    public void setRequests(Set<CarRequestDelivery> requests) {
+    public void setRequests(Set<CarDeliveryRequest> requests) {
         this.requests = requests;
     }
 }

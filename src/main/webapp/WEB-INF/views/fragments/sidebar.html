@@ -19,7 +19,7 @@
         </div>
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
-            <li class="treeview">
+            <li class="treeview" th:if="${#authorization.expression('isAuthenticated()')}">
                 <a href="#">
                     <i class="fa fa-dashboard"></i> <span> Мій кабінет</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
@@ -38,7 +38,7 @@
                     <li><a href="/leaseSubject/addLeaseSubject"><i class="fa fa-plus-circle"></i> Додати</a></li>
                 </ul>
             </li>
-            <li class="treeview" th:classappend="${sideTab = '3'}? 'active'">
+            <li class="treeview" th:if="${#authorization.expression('isAuthenticated()')}" th:classappend="${sideTab = '3'}? 'active'">
                 <a href="#">
                     <i class="fa fa-book"></i> <span> Мої документи</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>

@@ -1,5 +1,6 @@
 package com.drozd.controller;
 
+import com.drozd.forms.CarDataForm;
 import com.drozd.forms.CarDeliveryRequestForm;
 import com.drozd.persistence.models.Car;
 import com.drozd.persistence.models.Person;
@@ -44,7 +45,7 @@ public class CarRequestDeliveryController {
         List<Car> cars = carRepository.getCarsByPerson(person);
         model.addAttribute("cars", cars);
         if (cars.isEmpty()){
-            return ADD_LEASE_SUBJECT_VIEW;
+            return "redirect:/leaseSubject/addLeaseSubject";
         }
         model.addAttribute("requestForm", new CarDeliveryRequestForm());
         return ADD_CAR_REQUEST_DELIVERY_VIEW;
