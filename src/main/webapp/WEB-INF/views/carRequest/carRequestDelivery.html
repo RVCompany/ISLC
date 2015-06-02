@@ -43,77 +43,59 @@
             </h1>
         </section>
         <section class="content">
+            <th:block th:if="${#fields.hasErrors('${requestDeliveryForm.*}')}">
+                <div th:replace="fragments/alert :: alert (type='danger', message='Форма містить помилки, спробуй те ще раз.')"></div>
+            </th:block>
             <div class="box box-primary">
                 <!-- form start -->
-                <form role="form">
+                <form role="form"  th:object="requestForm}" th:action="@{/carRequest/carRequestDelivery}" action="/carRequest/carRequestDelivery" method="post">
                     <div class="box-body">
                         <!-- left column -->
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Виберіть машину</label>
-                                <select class="form-control">
-                                    <option>Седан</option>
-                                    <option>Хечбек</option>
-                                    <option>Універсал</option>
-                                    <option>Позашляховик</option>
-                                    <option>Купе</option>
+                                <select class="form-control" th:field="*{carId}">
+                                    <option th:each="car : ${cars}" th:value="${car.carId}" th:text="${car.brand}+' '+${car.model}"></option>
                                 </select>
                             </div>
-
-
-                                <div class="form-group">
-                                    <label for="carPrice">Ціна автомобіля</label>
-                                    <input type="text" class="form-control" id="carPrice"
-                                           placeholder="Введіть ціну автомобіля"/>
+                                <div class="form-group" th:field="*{avans}" th:classappend="${#fields.hasErrors('advance')}? 'has-error'">
+                                    <label for="advance">Авансовий платіж, %</label>
+                                    <input type="text" class="form-control" id="advance" th:field="*{advance}"
+                                           placeholder="Введіть авансовий платіж (у %)"/>
+                                    <span class="help-block" th:if="${#fields.hasErrors('advance')}" th:errors="*{advance}"></span>
                                 </div>
-
-
-                                    <div class="form-group">
-                                        <label for="avans">Авансовий платіж, %</label>
-                                        <input type="text" class="form-control" id="avans"
-                                               placeholder="Введіть авансовий платіж (у %)"/>
-                                    </div>
-
-                            <div class="form-group">
-                                <label for="procent">Вартість лізингу, % річних</label>
-                                <input type="text" class="form-control" id="procent"
+                            <div class="form-group" th:field="*{rate}" th:classappend="${#fields.hasErrors('rate')}? 'has-error'">
+                                <label for="rate">Вартість лізингу, % річних</label>
+                                <input type="text" class="form-control" id="rate" th:field="*{rate}"
                                        placeholder="Введіть вартість користування лізингом (у %)"/>
+                                <span class="help-block" th:if="${#fields.hasErrors('rate')}" th:errors="*{rate}"></span>
+
                             </div>
-
-
-
-
                         </div>
                         <!--/.col (left) -->
-
                         <div class="col-md-6">
                             <!-- form start -->
-
-
-
-                            <div class="form-group">
+                            <div class="form-group" th:field="*{remainder}" th:classappend="${#fields.hasErrors('remainder')}? 'has-error'">
                                 <label for="remainder">Залишкова, викупна вартість предмету лізингу, %</label>
-                                <input type="text" class="form-control" id="remainder"
+                                <input type="text" class="form-control" id="remainder" th:field="*{remainder}"
                                        placeholder="Введіть залишкову вартість предмету лізингу (у %)"/>
+                                <span class="help-block" th:if="${#fields.hasErrors('remainder')}" th:errors="*{remainder}"></span>
+
                             </div>
-
-
                             <div class="form-group">
                                 <label>Тип графіка погашення</label>
-                                <select class="form-control">
-                                    <option>Регулярні постійні платежі (Ануїтет)</option>
-                                    <option>Регулярні платежі з постійним темпом зміни</option>
-                                    <option>Регулярні платежі з амортизацією боргу рівними частинами</option>
+                                <select class="form-control" th:field="*{paymentSchedule}" >
+                                    <option value="1">Регулярні постійні платежі (Ануїтет)</option>
+                                    <option value="2">Регулярні платежі з постійним темпом зміни</option>
+                                    <option value="3">Регулярні платежі з амортизацією боргу рівними частинами</option>
                                 </select>
                             </div>
-
-
                             <div class="form-group">
                                 <label>Періодичність платежу</label>
-                                <select class="form-control">
-                                    <option>Щомісяця</option>
-                                    <option>Щокварталу</option>
-                                    <option>Щороку</option>
+                                <select class="form-control" th:field="*{paymentFrequency}">
+                                    <option value="1">Щомісяця</option>
+                                    <option value="2">Щокварталу</option>
+                                    <option value="3">Щороку</option>
                                 </select>
                             </div>
                         </div>
@@ -122,7 +104,7 @@
                     <!-- /.box-body -->
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary">Опублікувати заявку</button>
-                        <button type="submit" class="btn btn-primary">Переглянути графік платежів</button>
+                        <button class="btn btn-primary">Переглянути графік платежів</button>
                     </div>
 
                 </form>

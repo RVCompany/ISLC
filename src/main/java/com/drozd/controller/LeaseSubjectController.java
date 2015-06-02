@@ -30,8 +30,8 @@ import java.util.List;
 @RequestMapping("/leaseSubject")
 public class LeaseSubjectController {
 
-    private final static String ADD_LEASE_SUBJECT_VIEW = "leaseSubject/addLeaseSubject";
     private final static String LEASE_SUBJECT_TABLE_VIEW = "leaseSubject/leaseSubjectTable";
+    public final static String ADD_LEASE_SUBJECT_VIEW = "leaseSubject/addLeaseSubject";
 
     private static List<CarAttribute> allAttributes;
 

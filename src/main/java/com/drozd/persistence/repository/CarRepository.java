@@ -23,6 +23,12 @@ public class CarRepository {
 		return car;
 	}
 
+    public Car getCarsById(Long carId) {
+        return entityManager.createQuery("select car from Car car where car.carId = :carId", Car.class)
+                .setParameter("carId", carId)
+                .getSingleResult();
+    }
+
     public List<Car> getCarsByPerson(Person person) {
         return entityManager.createQuery("select car from Car car where car.person = :person", Car.class)
                 .setParameter("person", person)

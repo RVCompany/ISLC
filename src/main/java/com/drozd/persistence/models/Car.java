@@ -52,6 +52,9 @@ public class Car implements java.io.Serializable {
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "cars")
     private Set<CarAttributeValue> attributeValues = new HashSet<>(0);
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "car")
+    private Set<CarRequestDelivery> requests;
+
     public Car() {
     }
 
@@ -171,5 +174,14 @@ public class Car implements java.io.Serializable {
 
     public void setYear(Integer year) {
         this.year = year;
+    }
+
+    public Set<CarRequestDelivery> getRequests() {
+
+        return requests;
+    }
+
+    public void setRequests(Set<CarRequestDelivery> requests) {
+        this.requests = requests;
     }
 }
