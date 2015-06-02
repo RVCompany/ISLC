@@ -52,10 +52,27 @@
                     <div class="box-body">
                         <!-- left column -->
                         <div class="col-md-6">
-                            <div class="form-group has-feedback" th:classappend="${#fields.hasErrors('brand')}? 'has-error'">
+                            <div class="form-group">
                                 <label>Марка автомобіля</label>
-                                <input type="text" class="form-control" placeholder="Tesla" th:field="*{brand}"/>
-                                <span class="help-block" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}">Це поле не повинне бути пустим</span>
+                                <select class="form-control" th:field="*{brand}">
+                                    <option value="Alpha Romeo">Alpha Romeo</option>
+                                    <option value="Audi">Audi</option>
+                                    <option value="Aston Martin">Aston Martin</option>
+                                    <option value="BMW">BMW</option>
+                                    <option value="Jaguar">Jaguar</option>
+                                    <option value="Maserati">Maserati</option>
+                                    <option value="Lexus">Lexus</option>
+                                    <option value="Opel">Opel</option>
+                                    <option value="Peugeot">Peugeot</option>
+                                    <option value="Rolls-Royce">Rolls-Royce</option>
+                                    <option value="Renault">Renault</option>
+                                    <option value="Skoda">Skoda</option>
+                                    <option value="Volkswagen">Volkswagen</option>
+                                    <option value="Volvo">Volvo</option>
+                                    <option value="Ford">Ford</option>
+                                    <option value="Boqdan">Boqdan</option>
+                                    <option value="ZAZ">ZAZ</option>
+                                </select>
                             </div>
                             <div class="form-group has-feedback" th:classappend="${#fields.hasErrors('model')}? 'has-error'">
                                 <label>Модель автомобіля</label>
