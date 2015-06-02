@@ -17,6 +17,69 @@ public class CarAttributeValueService {
     @Autowired
     private CarAttributeRepository carAttributeRepository;
 
+    public void initAttributesAndValues() {
+
+        CarAttribute carAttributeBodyType = carAttributeRepository.save(new CarAttribute("Тип кузова"));
+        CarAttribute carAttributeKPPType = carAttributeRepository.save(new CarAttribute("Тип коробки передач"));
+        CarAttribute carAttributeHandleType = carAttributeRepository.save(new CarAttribute("Тип приводу"));
+        CarAttribute carAttributeFuelType = carAttributeRepository.save(new CarAttribute("Тип пального"));
+
+        CarAttributeValue carAttributeValueBT11 = new CarAttributeValue(carAttributeBodyType, "Хетчбек");
+        CarAttributeValue carAttributeValueBT12 = new CarAttributeValue(carAttributeBodyType, "Седан");
+        CarAttributeValue carAttributeValueBT13 = new CarAttributeValue(carAttributeBodyType, "Універсал");
+        CarAttributeValue carAttributeValueBT14 = new CarAttributeValue(carAttributeBodyType, "Купе");
+        CarAttributeValue carAttributeValueBT15 = new CarAttributeValue(carAttributeBodyType, "Лімузин");
+        CarAttributeValue carAttributeValueBT16 = new CarAttributeValue(carAttributeBodyType, "Мінівен");
+        CarAttributeValue carAttributeValueBT17 = new CarAttributeValue(carAttributeBodyType, "Фургон");
+        CarAttributeValue carAttributeValueBT18 = new CarAttributeValue(carAttributeBodyType, "Кабріолет");
+        CarAttributeValue carAttributeValueBT19 = new CarAttributeValue(carAttributeBodyType, "Пікап");
+
+        CarAttributeValue carAttributeValueKPP11 = new CarAttributeValue(carAttributeKPPType, "Автомат");
+        CarAttributeValue carAttributeValueKPP12 = new CarAttributeValue(carAttributeKPPType, "Типтронік");
+        CarAttributeValue carAttributeValueKPP13 = new CarAttributeValue(carAttributeKPPType, "Механічна");
+        CarAttributeValue carAttributeValueKPP14 = new CarAttributeValue(carAttributeKPPType, "Напівавтомат");
+
+        CarAttributeValue carAttributeValueHT11 = new CarAttributeValue(carAttributeHandleType, "Повний");
+        CarAttributeValue carAttributeValueHT12 = new CarAttributeValue(carAttributeHandleType, "Передній");
+        CarAttributeValue carAttributeValueHT13 = new CarAttributeValue(carAttributeHandleType, "Задній");
+
+
+        CarAttributeValue carAttributeValueFT11 = new CarAttributeValue(carAttributeFuelType, "Бензин");
+        CarAttributeValue carAttributeValueFT12 = new CarAttributeValue(carAttributeFuelType, "Дизель");
+        CarAttributeValue carAttributeValueFT13 = new CarAttributeValue(carAttributeFuelType, "Газ");
+        CarAttributeValue carAttributeValueFT14 = new CarAttributeValue(carAttributeFuelType, "Гібрид");
+        CarAttributeValue carAttributeValueFT15 = new CarAttributeValue(carAttributeFuelType, "Електро");
+        CarAttributeValue carAttributeValueFT16 = new CarAttributeValue(carAttributeFuelType, "Газ/бензин");
+        CarAttributeValue carAttributeValueFT17 = new CarAttributeValue(carAttributeFuelType, "Інше");
+
+        carAttributeValueRepository.save(carAttributeValueBT11);
+        carAttributeValueRepository.save(carAttributeValueBT12);
+        carAttributeValueRepository.save(carAttributeValueBT13);
+        carAttributeValueRepository.save(carAttributeValueBT14);
+        carAttributeValueRepository.save(carAttributeValueBT15);
+        carAttributeValueRepository.save(carAttributeValueBT16);
+        carAttributeValueRepository.save(carAttributeValueBT17);
+        carAttributeValueRepository.save(carAttributeValueBT18);
+        carAttributeValueRepository.save(carAttributeValueBT19);
+
+        carAttributeValueRepository.save(carAttributeValueKPP11);
+        carAttributeValueRepository.save(carAttributeValueKPP12);
+        carAttributeValueRepository.save(carAttributeValueKPP13);
+        carAttributeValueRepository.save(carAttributeValueKPP14);
+
+        carAttributeValueRepository.save(carAttributeValueHT11);
+        carAttributeValueRepository.save(carAttributeValueHT12);
+        carAttributeValueRepository.save(carAttributeValueHT13);
+
+        carAttributeValueRepository.save(carAttributeValueFT11);
+        carAttributeValueRepository.save(carAttributeValueFT12);
+        carAttributeValueRepository.save(carAttributeValueFT13);
+        carAttributeValueRepository.save(carAttributeValueFT14);
+        carAttributeValueRepository.save(carAttributeValueFT15);
+        carAttributeValueRepository.save(carAttributeValueFT16);
+        carAttributeValueRepository.save(carAttributeValueFT17);
+    }
+
     @Autowired
     private CarAttributeValueRepository carAttributeValueRepository;
 
@@ -28,58 +91,5 @@ public class CarAttributeValueService {
             }
         }
         return values;
-    }
-
-    public void initAttributesAndValues() {
-
-        CarAttribute carAttribute = carAttributeRepository.save(new CarAttribute("Тип кузова"));
-        CarAttribute carAttribute2 = carAttributeRepository.save(new CarAttribute("att2"));
-        CarAttribute carAttribute3 = carAttributeRepository.save(new CarAttribute("att3"));
-        CarAttribute carAttribute4 = carAttributeRepository.save(new CarAttribute("att4"));
-
-        CarAttributeValue carAttributeValue11 = new CarAttributeValue(carAttribute, "Хетчбек");
-        CarAttributeValue carAttributeValue12 = new CarAttributeValue(carAttribute, "Седан");
-        CarAttributeValue carAttributeValue13 = new CarAttributeValue(carAttribute, "Універсал");
-        CarAttributeValue carAttributeValue14 = new CarAttributeValue(carAttribute, "Купе");
-        CarAttributeValue carAttributeValue15 = new CarAttributeValue(carAttribute, "Лімузин");
-        CarAttributeValue carAttributeValue16 = new CarAttributeValue(carAttribute, "Мінівен");
-
-        CarAttributeValue carAttributeValue21 = new CarAttributeValue(carAttribute2, "atr2val1");
-        CarAttributeValue carAttributeValue22 = new CarAttributeValue(carAttribute2, "atr2val2");
-        CarAttributeValue carAttributeValue23 = new CarAttributeValue(carAttribute2, "atr2val3");
-        CarAttributeValue carAttributeValue24 = new CarAttributeValue(carAttribute2, "atr2val4");
-
-        CarAttributeValue carAttributeValue31 = new CarAttributeValue(carAttribute3, "atr3val1");
-        CarAttributeValue carAttributeValue32 = new CarAttributeValue(carAttribute3, "atr3val2");
-        CarAttributeValue carAttributeValue33 = new CarAttributeValue(carAttribute3, "atr3val3");
-        CarAttributeValue carAttributeValue34 = new CarAttributeValue(carAttribute3, "atr3val4");
-
-        CarAttributeValue carAttributeValue41 = new CarAttributeValue(carAttribute4, "atr4val1");
-        CarAttributeValue carAttributeValue42 = new CarAttributeValue(carAttribute4, "atr4val2");
-        CarAttributeValue carAttributeValue43 = new CarAttributeValue(carAttribute4, "atr4val3");
-        CarAttributeValue carAttributeValue44 = new CarAttributeValue(carAttribute4, "atr4val4");
-
-
-        carAttributeValueRepository.save(carAttributeValue11);
-        carAttributeValueRepository.save(carAttributeValue12);
-        carAttributeValueRepository.save(carAttributeValue13);
-        carAttributeValueRepository.save(carAttributeValue14);
-        carAttributeValueRepository.save(carAttributeValue15);
-        carAttributeValueRepository.save(carAttributeValue16);
-
-        carAttributeValueRepository.save(carAttributeValue21);
-        carAttributeValueRepository.save(carAttributeValue22);
-        carAttributeValueRepository.save(carAttributeValue23);
-        carAttributeValueRepository.save(carAttributeValue24);
-
-        carAttributeValueRepository.save(carAttributeValue31);
-        carAttributeValueRepository.save(carAttributeValue32);
-        carAttributeValueRepository.save(carAttributeValue33);
-        carAttributeValueRepository.save(carAttributeValue34);
-
-        carAttributeValueRepository.save(carAttributeValue41);
-        carAttributeValueRepository.save(carAttributeValue42);
-        carAttributeValueRepository.save(carAttributeValue43);
-        carAttributeValueRepository.save(carAttributeValue44);
     }
 }
