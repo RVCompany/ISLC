@@ -3,8 +3,10 @@ package com.drozd.controller;
 import com.drozd.forms.CarDataForm;
 import com.drozd.forms.CarDeliveryRequestForm;
 import com.drozd.persistence.models.Car;
+import com.drozd.persistence.models.CarDeliveryRequest;
 import com.drozd.persistence.models.Person;
 import com.drozd.persistence.repository.CarRepository;
+import com.drozd.persistence.repository.CarRequestDeliveryRepository;
 import com.drozd.service.PersonService;
 import com.drozd.support.enums.SideTab;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,15 +32,20 @@ public class CarRequestDeliveryController {
 
     private final static String ADD_CAR_REQUEST_DELIVERY_VIEW = "carRequest/carRequestDelivery";
 
+    private final static String ALL_REQUESTS_VIEW = "carRequest/allRequests";
+
     @Autowired
     private PersonService personService;
 
     @Autowired
     private CarRepository carRepository;
 
+    @Autowired
+    private CarRequestDeliveryRepository requestRepository;
+
     @RequestMapping(value = "/carRequestDelivery", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
-    public String carRequestDelivery(Principal principal, Model model) {
+    public String addDeliveryRequest(Principal principal, Model model) {
         Person person = personService.getPersonByEmail(principal.getName());
         model.addAttribute("person",  person);
         model.addAttribute("sideTab", SideTab.REQUEST.getCode());
@@ -53,7 +60,7 @@ public class CarRequestDeliveryController {
 
     @RequestMapping(value = "/carRequestDelivery", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public String addRequestDelivery(@Valid @ModelAttribute CarDeliveryRequestForm requestForm, Principal principal, Model model) {
+    public String addDeliveryRequest(@Valid @ModelAttribute CarDeliveryRequestForm requestForm, Principal principal, Model model) {
         Person person = personService.getPersonByEmail(principal.getName());
         model.addAttribute("person",  person);
         model.addAttribute("sideTab", SideTab.REQUEST.getCode());
@@ -63,8 +70,20 @@ public class CarRequestDeliveryController {
             return ADD_LEASE_SUBJECT_VIEW;
         }
         Car car = carRepository.getCarsById(requestForm.getCarId());
-        requestForm.createRequest(car);
+        requestRepository.save(requestForm.createRequest(car));
+        return "home/home";
+    }
 
+    @RequestMapping(value = "/myRequests", method = RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.OK)
+    public String showMyRequests(@Valid @ModelAttribute CarDeliveryRequestForm requestForm, Principal principal, Model model) {
+        Person person = personService.getPersonByEmail(principal.getName());
+        model.addAttribute("person",  person);
+        List<CarDeliveryRequest> requests = requestRepository.getAllRequestsByPerson(person);
+        if (requests.isEmpty()) {
+            return ADD_CAR_REQUEST_DELIVERY_VIEW;
+        }
+        model.addAttribute("requests", requests);
         return "home/home";
     }
 }

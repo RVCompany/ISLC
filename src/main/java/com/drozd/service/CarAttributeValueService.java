@@ -7,6 +7,7 @@ import com.drozd.persistence.repository.CarAttributeValueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,6 +18,7 @@ public class CarAttributeValueService {
     @Autowired
     private CarAttributeRepository carAttributeRepository;
 
+    @PostConstruct
     public void initAttributesAndValues() {
 
         CarAttribute carAttributeBodyType = carAttributeRepository.save(new CarAttribute("Тип кузова"));

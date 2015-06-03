@@ -34,8 +34,6 @@ public class UserService implements UserDetailsService {
 
         personRepository.save(getAdminPerson(admin));
         personRepository.save(getDefaultUserPerson(user));
-
-        carAttributeValueService.initAttributesAndValues();
 	}
 	
 	@Override
