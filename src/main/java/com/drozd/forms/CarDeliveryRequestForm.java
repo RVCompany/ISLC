@@ -9,14 +9,11 @@ import javax.validation.constraints.NotNull;
 
 public class CarDeliveryRequestForm {
 
-    private static final String NOT_BLANK_MESSAGE = "{notBlank.message}";
-
     private Long carId;
 
     @NotNull
     @Min(0)
     @Max(100)
-
     private Double advance;
 
     @NotNull

@@ -41,7 +41,7 @@ public class Car implements java.io.Serializable {
     @Column
     private boolean inLease;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "personId", nullable = true)
     private Person person;
 

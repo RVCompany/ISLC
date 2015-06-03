@@ -13,14 +13,35 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class CarAttributeValueService {
+public class CarAttributeService {
+
+    private static List<CarAttribute> allAttributes;
 
     @Autowired
     private CarAttributeRepository carAttributeRepository;
 
-    @PostConstruct
-    public void initAttributesAndValues() {
+    @Autowired
+    private CarAttributeValueRepository carAttributeValueRepository;
 
+    public Set<CarAttributeValue> getValuesByIds(List<String> ids) {
+        Set<CarAttributeValue> values = new HashSet<CarAttributeValue>();
+        for (String id : ids) {
+            if (id != null) {
+                values.add(carAttributeValueRepository.getById(Long.parseLong(id)));
+            }
+        }
+        return values;
+    }
+
+    public List<CarAttribute> getAllAttributes() {
+        if (allAttributes == null || allAttributes.isEmpty()) {
+            allAttributes = carAttributeRepository.getAllCarAttributes();
+        }
+        return allAttributes;
+    }
+
+    @PostConstruct
+    public void initialize() {
         CarAttribute carAttributeBodyType = carAttributeRepository.save(new CarAttribute("Тип кузова"));
         CarAttribute carAttributeKPPType = carAttributeRepository.save(new CarAttribute("Тип коробки передач"));
         CarAttribute carAttributeHandleType = carAttributeRepository.save(new CarAttribute("Тип приводу"));
@@ -80,18 +101,5 @@ public class CarAttributeValueService {
         carAttributeValueRepository.save(carAttributeValueFT15);
         carAttributeValueRepository.save(carAttributeValueFT16);
         carAttributeValueRepository.save(carAttributeValueFT17);
-    }
-
-    @Autowired
-    private CarAttributeValueRepository carAttributeValueRepository;
-
-    public Set<CarAttributeValue> getValuesByIds(List<String> ids) {
-        Set<CarAttributeValue> values = new HashSet<>();
-        for (String id : ids) {
-            if (id != null) {
-                values.add(carAttributeValueRepository.getById(Long.parseLong(id)));
-            }
-        }
-        return values;
     }
 }

@@ -19,7 +19,7 @@ public class CarDeliveryRequest {
     @Column(name = "requestId", unique = true, nullable = false)
     private Long requestId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "carId", nullable = true)
     private Car car;
 
@@ -38,9 +38,6 @@ public class CarDeliveryRequest {
     @Column
     private String paymentSchedule;
 
-
-
-
     public CarDeliveryRequest(Car car, Double advance, Integer period, Double rate, Double remainder, String paymentSchedule, String paymentFrequency) {
         this.car = car;
         this.advance = advance;
@@ -50,7 +47,6 @@ public class CarDeliveryRequest {
         this.paymentSchedule = paymentSchedule;
         this.paymentFrequency = paymentFrequency;
     }
-
 
     @Column
     private String paymentFrequency;

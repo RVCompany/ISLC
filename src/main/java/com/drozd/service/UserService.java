@@ -14,7 +14,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.*;
 
-import static com.drozd.bulider.PersonHelper.*;
+import static com.drozd.support.PersonHelper.*;
 
 public class UserService implements UserDetailsService {
 	
@@ -24,16 +24,10 @@ public class UserService implements UserDetailsService {
     @Autowired
 	private PersonRepository personRepository;
 
-    @Autowired
-    private CarAttributeValueService carAttributeValueService;
-	
 	@PostConstruct	
 	protected void initialize() {
-		Account admin = accountRepository.save(getAdminAccount());
-		Account user = accountRepository.save(getDefaultUserAccount());
-
-        personRepository.save(getAdminPerson(admin));
-        personRepository.save(getDefaultUserPerson(user));
+		accountRepository.save(getAdminAccount());
+		accountRepository.save(getDefaultUserAccount());
 	}
 	
 	@Override
