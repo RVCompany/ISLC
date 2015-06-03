@@ -24,12 +24,12 @@ public class CarRequestDeliveryRepository {
     }
 
     public List<CarAttribute> getCarDeliveryRequests(Person person) {
-        return entityManager.createQuery("SELECT crd FROM CarRequestDelivery crd where crd.car.person = :person")
+        return entityManager.createQuery("SELECT crd FROM CarDeliveryRequest crd where crd.car.person = :person")
                 .setParameter("person", person)
                 .getResultList();
     }
 
     public List<CarDeliveryRequest> getAllCarDeliveryRequests() {
-        return entityManager.createQuery("SELECT crd FROM CarRequestDelivery crd").getResultList();
+        return entityManager.createQuery("SELECT crd FROM CarDeliveryRequest crd").getResultList();
     }
 }
