@@ -27,6 +27,9 @@ public class CarDeliveryRequest {
     private Double advance;
 
     @Column
+    private Integer period;
+
+    @Column
     private Double rate;
 
     @Column
@@ -35,17 +38,22 @@ public class CarDeliveryRequest {
     @Column
     private String paymentSchedule;
 
-    @Column
-    private String paymentFrequency;
 
-    public CarDeliveryRequest(Car car, Double advance, Double rate, Double remainder, String paymentSchedule, String paymentFrequency) {
+
+
+    public CarDeliveryRequest(Car car, Double advance, Integer period, Double rate, Double remainder, String paymentSchedule, String paymentFrequency) {
         this.car = car;
         this.advance = advance;
+        this.period = period;
         this.rate = rate;
         this.remainder = remainder;
         this.paymentSchedule = paymentSchedule;
         this.paymentFrequency = paymentFrequency;
     }
+
+
+    @Column
+    private String paymentFrequency;
 
     public CarDeliveryRequest() {
     }
@@ -73,6 +81,10 @@ public class CarDeliveryRequest {
     public void setAdvance(Double advance) {
         this.advance = advance;
     }
+
+    public Integer getPeriod() { return period; }
+
+    public void setPeriod(Integer period) { this.period = period; }
 
     public Double getRate() {
         return rate;

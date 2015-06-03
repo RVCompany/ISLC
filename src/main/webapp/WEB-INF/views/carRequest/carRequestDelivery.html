@@ -43,12 +43,12 @@
             </h1>
         </section>
         <section class="content">
-            <th:block th:if="${#fields.hasErrors('${requestDeliveryForm.*}')}">
+            <th:block th:if="${#fields.hasErrors('${requestForm.*}')}">
                 <div th:replace="fragments/alert :: alert (type='danger', message='Форма містить помилки, спробуй те ще раз.')"></div>
             </th:block>
             <div class="box box-primary">
                 <!-- form start -->
-                <form role="form"  th:object="requestForm}" th:action="@{/carRequest/carRequestDelivery}" action="/carRequest/carRequestDelivery" method="post">
+                <form role="form"  th:object="${requestForm}" th:action="@{/carRequest/carRequestDelivery}" action="/carRequest/carRequestDelivery" method="post">
                     <div class="box-body">
                         <!-- left column -->
                         <div class="col-md-6">
@@ -75,6 +75,13 @@
                         <!--/.col (left) -->
                         <div class="col-md-6">
                             <!-- form start -->
+                            <div class="form-group" th:field="*{period}" th:classappend="${#fields.hasErrors('period')}? 'has-error'">
+                                <label for="remainder">Термін, місяців</label>
+                                <input type="text" class="form-control" id="period" th:field="*{period}"
+                                       placeholder="Введіть термін користування лізингом, місяців"/>
+                                <span class="help-block" th:if="${#fields.hasErrors('period')}" th:errors="*{period}"></span>
+                                </div>
+
                             <div class="form-group" th:field="*{remainder}" th:classappend="${#fields.hasErrors('remainder')}? 'has-error'">
                                 <label for="remainder">Залишкова, викупна вартість предмету лізингу, %</label>
                                 <input type="text" class="form-control" id="remainder" th:field="*{remainder}"

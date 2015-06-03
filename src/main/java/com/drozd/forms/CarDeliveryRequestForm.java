@@ -20,9 +20,9 @@ public class CarDeliveryRequestForm {
     private Double advance;
 
     @NotNull
-    @Min(0)
-    @Max(100)
-    private Double rate;
+    @Min(1)
+    @Max(500)
+    private Integer period;
 
     @NotNull
     @Min(0)
@@ -30,6 +30,11 @@ public class CarDeliveryRequestForm {
     private Double remainder;
 
     private String paymentSchedule;
+
+    @NotNull
+    @Min(0)
+    @Max(100)
+    private Double rate;
 
     private String paymentFrequency;
 
@@ -47,6 +52,14 @@ public class CarDeliveryRequestForm {
 
     public void setAdvance(Double advance) {
         this.advance = advance;
+    }
+
+    public Integer getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(Integer period) {
+        this.period = period;
     }
 
     public Double getRate() {
@@ -82,6 +95,6 @@ public class CarDeliveryRequestForm {
     }
 
     public CarDeliveryRequest createRequest(Car car) {
-        return new CarDeliveryRequest(car, advance, rate, remainder, paymentSchedule, paymentFrequency);
+        return new CarDeliveryRequest(car, advance, period, rate, remainder, paymentSchedule, paymentFrequency);
     }
 }
