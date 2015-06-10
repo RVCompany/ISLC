@@ -7,7 +7,7 @@ import com.drozd.persistence.models.CarDeliveryRequest;
 import com.drozd.persistence.repository.AccountRepository;
 import com.drozd.persistence.models.Person;
 import com.drozd.persistence.repository.CarAttributeRepository;
-import com.drozd.persistence.repository.CarRequestDeliveryRepository;
+import com.drozd.persistence.repository.CarDeliveryRequestRepository;
 import com.drozd.persistence.repository.PersonRepository;
 import com.drozd.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,32 +15,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import static com.drozd.controller.RequestController.ALL_DELIVERY_REQUESTS_VIEW;
+
 @Controller
 public class HomeController {
-
-    @Autowired
-    private PersonRepository personRepository;
-
-    @Autowired
-    private AccountRepository accountRepository;
-
-    @Autowired
-    private CarAttributeRepository carAttributeRepository;
 
     @Autowired
     private PersonService personService;
 
     @Autowired
-    private CarRequestDeliveryRepository requestRepository;
+    private CarDeliveryRequestRepository requestRepository;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Principal principal, Model model) {
         if (principal != null) {
-            Person person = personRepository.findByAccount(accountRepository.findByEmail(principal.getName()));
-            model.addAttribute("person", person);
+            Person person = personService.getPersonByEmail(principal.getName());
+            model.addAttribute("person",  person);
         }
         List<CarDeliveryRequest> requests = requestRepository.getAllRequests();
         model.addAttribute("requests", requests);
-        return "home/home";
+        return ALL_DELIVERY_REQUESTS_VIEW;
     }
 }

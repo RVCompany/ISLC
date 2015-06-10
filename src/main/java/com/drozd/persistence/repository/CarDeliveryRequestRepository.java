@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 @Transactional(readOnly = true)
-public class CarRequestDeliveryRepository {
+public class CarDeliveryRequestRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -19,6 +19,12 @@ public class CarRequestDeliveryRepository {
     @Transactional
     public CarDeliveryRequest save(CarDeliveryRequest request) {
         entityManager.persist(request);
+        return request;
+    }
+
+    @Transactional
+    public CarDeliveryRequest update(CarDeliveryRequest request) {
+        entityManager.refresh(request);
         return request;
     }
 

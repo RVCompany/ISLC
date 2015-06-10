@@ -3,11 +3,9 @@ package com.drozd.controller;
 import com.drozd.forms.CarDataForm;
 import com.drozd.persistence.models.Car;
 import com.drozd.persistence.models.Person;
-import com.drozd.persistence.repository.CarRepository;
 import com.drozd.service.CarAttributeService;
 import com.drozd.service.CarService;
 import com.drozd.service.PersonService;
-import com.drozd.support.enums.SideTab;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.annotation.Secured;
@@ -24,13 +22,20 @@ import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 
+import static com.drozd.persistence.models.Account.ROLE_USER;
+
 @Controller
-@Secured("ROLE_USER")
-@RequestMapping("/leaseSubject")
+@Secured(ROLE_USER)
+@RequestMapping(CarController.CAR_MAIN_RM)
 public class CarController {
 
-    private final static String LEASE_SUBJECT_TABLE_VIEW = "leaseSubject/leaseSubjectTable";
-    public final static String ADD_LEASE_SUBJECT_VIEW = "leaseSubject/addLeaseSubject";
+    private final static String CARS_TABLE_VIEW = "cars/carsTable";
+    private final static String ADD_CAR_VIEW = "cars/add";
+
+    public final static String CARS_TABLE_RM = "/carsTable";
+    public final static String ADD_CAR_RM = "/add";
+
+    public final static String CAR_MAIN_RM = "/cars";
 
     @Autowired
     private PersonService personService;
@@ -42,39 +47,39 @@ public class CarController {
     private CarAttributeService carAttributeService;
 
 
-    @RequestMapping(value = "/addLeaseSubject", method = RequestMethod.GET)
+    @RequestMapping(value = ADD_CAR_RM, method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
-    public String addLeaseSubject(Principal principal, Model model, CarDataForm carDataForm) {
+    public String showAddCarView(Principal principal, Model model, CarDataForm carDataForm) {
         model.addAttribute("person", personService.getPersonByEmail(principal.getName()));
         model.addAttribute("allAttributes", carAttributeService.getAllAttributes());
         model.addAttribute("carDataForm", carDataForm);
-        model.addAttribute("sideTab", SideTab.LEASE_SUBJECT.getCode());
-
-        return ADD_LEASE_SUBJECT_VIEW;
+        model.addAttribute("isCarsTab", true);
+        return ADD_CAR_VIEW;
     }
 
-    @RequestMapping(value = "/leaseSubjectTable", method = RequestMethod.GET)
-    @ResponseStatus(value = HttpStatus.OK)
-    public String leaseSubjectTable(Principal principal, Model model) {
-        Person person = personService.getPersonByEmail(principal.getName());
-        model.addAttribute("person", person);
-        model.addAttribute("sideTab", SideTab.LEASE_SUBJECT.getCode());
-        model.addAttribute("cars", carService.getCarsByPerson(person));
-        return LEASE_SUBJECT_TABLE_VIEW;
-    }
-
-    @RequestMapping(value = "/addLeaseSubject", method = RequestMethod.POST)
+    @RequestMapping(value = ADD_CAR_RM, method = RequestMethod.POST)
     public String add(@Valid @ModelAttribute CarDataForm carDataForm, Errors errors, Model model, Principal principal,
                       RedirectAttributes ra) {
         Person person = personService.getPersonByEmail(principal.getName());
+        model.addAttribute("person", person);
         if (errors.hasErrors()) {
-            return ADD_LEASE_SUBJECT_VIEW;
+            return ADD_CAR_VIEW;
         }
         List<String> attributeValueIds = carDataForm.getAttributeValueIds();
         Car car = carDataForm.createCar(carAttributeService.getValuesByIds(attributeValueIds), person);
         carService.save(car);
         model.addAttribute("cars", carService.getCarsByPerson(person));
-        return LEASE_SUBJECT_TABLE_VIEW;
+        model.addAttribute("isCarsTab", true);
+        return CARS_TABLE_VIEW;
     }
 
+    @RequestMapping(value = CARS_TABLE_RM, method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public String leaseSubjectTable(Principal principal, Model model) {
+        Person person = personService.getPersonByEmail(principal.getName());
+        model.addAttribute("person", person);
+        model.addAttribute("cars", carService.getCarsByPerson(person));
+        model.addAttribute("isCarsTab", true);
+        return CARS_TABLE_VIEW;
+    }
 }

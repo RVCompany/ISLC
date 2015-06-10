@@ -3,6 +3,8 @@ package com.drozd.support;
 import com.drozd.persistence.models.Account;
 import com.drozd.persistence.models.Person;
 
+import static com.drozd.persistence.models.Account.ROLE_USER;
+
 public class PersonHelper {
 
     public final static String ADMIN_EMAIL = "admin@admin.com";
@@ -14,7 +16,7 @@ public class PersonHelper {
     }
 
     public static Person getDefaultUserPerson(Account account){
-        return new Person("Default", "User", account);
+        return new Person("Роман", "Дрозд", account);
     }
 
     public static Account getAdminAccount(){
@@ -22,6 +24,6 @@ public class PersonHelper {
     }
 
     public static Account getDefaultUserAccount(){
-        return new Account(DEMO_USER_EMAIL, "demo", "ROLE_USER");
+        return new Account(DEMO_USER_EMAIL, "demo", ROLE_USER);
     }
 }

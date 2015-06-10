@@ -12,6 +12,8 @@ public class Account implements java.io.Serializable {
 
 	public static final String FIND_BY_EMAIL = "Account.findByEmail";
 
+    public static final String ROLE_USER = "ROLE_USER";
+
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -22,7 +24,7 @@ public class Account implements java.io.Serializable {
 	@JsonIgnore
 	private String password;
 
-	private String role = "ROLE_USER";
+	private String role = ROLE_USER;
 
     protected Account() {
 

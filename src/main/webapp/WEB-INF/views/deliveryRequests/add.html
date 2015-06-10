@@ -44,11 +44,11 @@
         </section>
         <section class="content">
             <th:block th:if="${#fields.hasErrors('${carDeliveryRequestForm.*}')}">
-                <div th:replace="fragments/alert :: alert (type='danger', message='Форма містить помилки, спробуй те ще раз.')"></div>
+                <div th:replace="fragments/alert :: alert (type='danger', message='Форма містить помилки, спробуйте ще раз.')"></div>
             </th:block>
             <div class="box box-primary">
                 <!-- form start -->
-                <form role="form"  th:object="${carDeliveryRequestForm}" th:action="@{/carRequest/carRequestDelivery}" action="/carRequest/carRequestDelivery" method="post">
+                <form role="form"  th:object="${carDeliveryRequestForm}" th:action="@{/deliveryRequests/add}" action="/deliveryRequests/add" method="post">
                     <div class="box-body">
                         <!-- left column -->
                         <div class="col-md-6">

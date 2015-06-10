@@ -4,10 +4,9 @@ import com.drozd.forms.CarDeliveryRequestForm;
 import com.drozd.persistence.models.Car;
 import com.drozd.persistence.models.CarDeliveryRequest;
 import com.drozd.persistence.models.Person;
+import com.drozd.persistence.repository.CarDeliveryRequestRepository;
 import com.drozd.persistence.repository.CarRepository;
-import com.drozd.persistence.repository.CarRequestDeliveryRepository;
 import com.drozd.service.PersonService;
-import com.drozd.support.enums.SideTab;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.annotation.Secured;
@@ -24,14 +23,27 @@ import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 
+import static com.drozd.persistence.models.Account.*;
+
 @Controller
-@Secured("ROLE_USER")
-@RequestMapping("/carRequest")
-public class CarRequestDeliveryController {
+@RequestMapping(RequestController.DELIVERY_REQUESTS_MAIN_RM)
+public class RequestController {
 
-    private final static String ADD_CAR_REQUEST_DELIVERY_VIEW = "carRequest/carRequestDelivery";
+    private final static String ADD_REQUEST_VIEW = "deliveryRequests/add";
 
-    private final static String ALL_REQUESTS_VIEW = "carRequest/allRequests";
+    private final static String MY_REQUESTS_VIEW = "deliveryRequests/myRequests";
+
+    private final static String ADD_REQUEST_RM = "/add";
+
+    private final static String ALL_REQUESTS_RM = "/allRequests";
+
+    private final static String REDIRECT = "redirect:";
+
+    private final static String MY_REQUESTS_RM = "/myRequests";
+
+    public final static String ALL_DELIVERY_REQUESTS_VIEW = "deliveryRequests/allRequests";
+
+    public final static String DELIVERY_REQUESTS_MAIN_RM = "/deliveryRequests";
 
     @Autowired
     private PersonService personService;
@@ -40,50 +52,67 @@ public class CarRequestDeliveryController {
     private CarRepository carRepository;
 
     @Autowired
-    private CarRequestDeliveryRepository requestRepository;
+    private CarDeliveryRequestRepository requestRepository;
 
-    @RequestMapping(value = "/carRequestDelivery", method = RequestMethod.GET)
+    @Secured(ROLE_USER)
+    @RequestMapping(value = ADD_REQUEST_RM, method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
-    public String addDeliveryRequest(Principal principal, Model model) {
+    public String showAddView(Principal principal, Model model) {
         Person person = personService.getPersonByEmail(principal.getName());
         model.addAttribute("person",  person);
-        model.addAttribute("sideTab", SideTab.REQUEST.getCode());
         List<Car> cars = carRepository.getCarsByPerson(person);
         model.addAttribute("cars", cars);
         if (cars.isEmpty()){
-            return "redirect:/leaseSubject/addLeaseSubject";
+            return REDIRECT + CarController.CAR_MAIN_RM + CarController.ADD_CAR_RM;
         }
         model.addAttribute("carDeliveryRequestForm", new CarDeliveryRequestForm());
-        return ADD_CAR_REQUEST_DELIVERY_VIEW;
+        model.addAttribute("isDeliveryRequestTab", true);
+        return ADD_REQUEST_VIEW;
     }
 
-    @RequestMapping(value = "/carRequestDelivery", method = RequestMethod.POST)
+    @Secured(ROLE_USER)
+    @RequestMapping(value = ADD_REQUEST_RM, method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public String addDeliveryRequest(@Valid @ModelAttribute CarDeliveryRequestForm carDeliveryRequestForm,  Errors errors,
+    public String add(@Valid @ModelAttribute CarDeliveryRequestForm carDeliveryRequestForm,  Errors errors,
                                      Principal principal, Model model, RedirectAttributes ra) {
         Person person = personService.getPersonByEmail(principal.getName());
         model.addAttribute("person",  person);
-        model.addAttribute("sideTab", SideTab.REQUEST.getCode());
+        model.addAttribute("isDeliveryRequestTab", true);
         if (errors.hasErrors()) {
             List<Car> cars = carRepository.getCarsByPerson(person);
             model.addAttribute("cars", cars);
-            return ADD_CAR_REQUEST_DELIVERY_VIEW;
+            return ADD_REQUEST_VIEW;
         }
         Car car = carRepository.getCarsById(carDeliveryRequestForm.getCarId());
         requestRepository.save(carDeliveryRequestForm.createRequest(car));
-        return "home/home";
+        return REDIRECT + DELIVERY_REQUESTS_MAIN_RM + MY_REQUESTS_RM;
     }
 
-    @RequestMapping(value = "/myRequests", method = RequestMethod.GET)
+    @Secured(ROLE_USER)
+    @RequestMapping(value = MY_REQUESTS_RM, method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public String showMyRequests(Principal principal, Model model) {
         Person person = personService.getPersonByEmail(principal.getName());
         model.addAttribute("person",  person);
         List<CarDeliveryRequest> requests = requestRepository.getAllRequestsByPerson(person);
         if (requests.isEmpty()) {
-            return "redirect:/carRequest/carRequestDelivery";
+            return REDIRECT + DELIVERY_REQUESTS_MAIN_RM + ADD_REQUEST_RM;
         }
         model.addAttribute("requests", requests);
-        return "home/home";
+        model.addAttribute("isDeliveryRequestTab", true);
+        return MY_REQUESTS_VIEW;
+    }
+
+    @RequestMapping(value = ALL_REQUESTS_RM, method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public String showAllRequests(Principal principal, Model model) {
+        if (principal != null) {
+            Person person = personService.getPersonByEmail(principal.getName());
+            model.addAttribute("person",  person);
+        }
+        List<CarDeliveryRequest> requests = requestRepository.getAllRequests();
+        model.addAttribute("requests", requests);
+        model.addAttribute("isDeliveryRequestTab", true);
+        return ALL_DELIVERY_REQUESTS_VIEW;
     }
 }

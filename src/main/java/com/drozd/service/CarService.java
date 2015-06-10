@@ -60,7 +60,7 @@ public class CarService {
         Car car7 = new Car("Lexus", "S6", randInt(10000, Integer.MAX_VALUE), true, 10.0, 2.0,
                 randInt(0, 100000), randInt(1900, 2015), prepareValues(), demoUser);
         Car car8 = new Car("Opel", "Kadet", randInt(10000, Integer.MAX_VALUE), true, 10.0, 2.0,
-                randInt(0, 100000), randInt(1900, 2015), prepareValues(), demoUser);
+                randInt(0, 100000), randInt(1900, 2015), prepareValues(),  demoUser);
         Car car9 = new Car("Peugeot", "Kangoo", randInt(10000, Integer.MAX_VALUE), true, 10.0, 2.0,
                 randInt(0, 100000), randInt(1900, 2015), prepareValues(), demoUser);
         Car car10 = new Car("Rolls-Royce", "SDX", randInt(10000, Integer.MAX_VALUE), true, 10.0, 2.0,

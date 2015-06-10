@@ -24,33 +24,37 @@
                     <i class="fa fa-dashboard"></i> <span> Мій кабінет</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active"><a href="#"><i class="fa fa-circle-o"></i> Мої дані</a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Мої дані</a></li>
                     <li><a href="#"><i class="fa fa-circle-o"></i> Моя фірма</a></li>
                 </ul>
             </li>
-            <li class="treeview" th:if="${#authorization.expression('isAuthenticated()')}" th:classappend="${sideTab = '1'}? 'active' : ''">
+            <li class="treeview" th:if="${#authorization.expression('isAuthenticated()')}" th:classappend="${isCarsTab}? 'active'">
                 <a href="#">
-                    <i class="fa fa-car"></i>
-                    <span>Предмети лізингу</span>
+                    <i class="fa fa-car"></i><span>Предмети лізингу</span><i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="/leaseSubject/leaseSubjectTable"><i class="fa fa-car"></i> Мої авто</a></li>
-                    <li><a href="/leaseSubject/addLeaseSubject"><i class="fa fa-plus-circle"></i> Додати</a></li>
+                    <li><a href="/cars/carsTable"><i class="fa fa-car"></i> Мої авто</a></li>
+                    <li><a href="/cars/add"><i class="fa fa-plus-circle"></i> Додати</a></li>
                 </ul>
             </li>
-            <li class="treeview" th:if="${#authorization.expression('isAuthenticated()')}" th:classappend="${sideTab = '3'}? 'active'">
+            <li class="treeview" th:if="${#authorization.expression('isAuthenticated()')}" th:classappend="${isDeliveryRequestTab}? 'active'">
                 <a href="#">
-                    <i class="fa fa-book"></i> <span> Мої документи</span> <i class="fa fa-angle-left pull-right"></i>
+                    <i class="fa fa-book"></i> <span>Документи</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="treeview" th:classappend="${sideTab = '3'}? 'active' : ''">
+                    <li class="treeview"  th:classappend="${isDeliveryRequestTab}? 'active'">
                         <a href="#">
                             <i class="fa fa-book"></i>
                             <span>Заявки на видачу майна</span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="/carRequest/myRequests"><i class="fa fa-car"></i>Мої заявки</a></li>
-                            <li><a href="/carRequest/carRequestDelivery"><i class="fa fa-plus-circle"></i>Додати</a></li>
+                            <li>
+                                <a href="/deliveryRequests/myRequests"><i class="fa fa-car"></i>Мої заявки</a>
+                            </li>
+                            <li>
+                                <a href="/deliveryRequests/allRequests"><i class="fa fa-car"></i>Всі заявки</a>
+                            </li>
+                            <li><a href="/deliveryRequests/add"><i class="fa fa-plus-circle"></i>Додати</a></li>
                         </ul>
                     </li>
 
@@ -62,11 +66,17 @@
                         <ul class="treeview-menu">
                             <li><a href="#"><i class="fa fa-car"></i> Мої заявки</a></li>
                             <li><a href="#"><i class="fa fa-car"></i> Договора на оренду майна</a></li>
-                            <li><a href="/leaseSubject/addLeaseSubject"><i class="fa fa-plus-circle"></i> Взяти в лізинг</a></li>
+                            <li><a href="#"><i class="fa fa-plus-circle"></i> Взяти в лізинг</a></li>
                         </ul>
                     </li>
-
                 </ul>
+            </li>
+
+            <li th:if="${not #authorization.expression('isAuthenticated()')}">
+                <a href="/deliveryRequests/allRequests">
+                    <i class="fa fa-book"></i>
+                    <span>Заявки на видачу майна</span>
+                </a>
             </li>
         </ul>
     </section>

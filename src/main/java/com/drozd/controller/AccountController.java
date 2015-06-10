@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import static com.drozd.persistence.models.Account.ROLE_USER;
+
 @Controller
-@Secured("ROLE_USER")
+@Secured(ROLE_USER)
 class AccountController {
 
     @Autowired

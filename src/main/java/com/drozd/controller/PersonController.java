@@ -15,9 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import static com.drozd.persistence.models.Account.ROLE_USER;
+
 @Controller
-@Secured("ROLE_USER")
+@Secured(ROLE_USER)
 class PersonController {
+
+    private static final String PERSONAL_DATA_VIEW = "personalData/personalData";
+
+    private static final String PERSONAL_DATA_RM = "personalData";
 
     @Autowired
     private PersonRepository personRepository;
@@ -25,9 +31,7 @@ class PersonController {
     @Autowired
     private AccountRepository accountRepository;
 
-    private static final String PERSONAL_DATA_VIEW = "personalData/personalData";
-
-    @RequestMapping(value = "personalData", method = RequestMethod.GET)
+    @RequestMapping(value = PERSONAL_DATA_RM, method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public String getPersonalData(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

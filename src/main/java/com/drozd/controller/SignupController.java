@@ -20,7 +20,9 @@ import com.drozd.support.web.*;
 @Controller
 public class SignupController {
 
-    private static final String SIGNUP_VIEW_NAME = "signup/signup";
+    private static final String SIGNUP_VIEW = "signup/signup";
+
+    private static final String SIGNUP_RM = "signup";
 
 	@Autowired
 	private AccountRepository accountRepository;
@@ -31,16 +33,16 @@ public class SignupController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value = "signup")
+	@RequestMapping(value = SIGNUP_RM)
 	public String signup(Model model) {
 		model.addAttribute(new SignupForm());
-        return SIGNUP_VIEW_NAME;
+        return SIGNUP_VIEW;
 	}
 	
-	@RequestMapping(value = "signup", method = RequestMethod.POST)
+	@RequestMapping(value = SIGNUP_RM, method = RequestMethod.POST)
 	public String signup(@Valid @ModelAttribute SignupForm signupForm, Errors errors, RedirectAttributes ra, Model model) {
 		if (errors.hasErrors()) {
-			return SIGNUP_VIEW_NAME;
+			return SIGNUP_VIEW;
 		}
 		Account account = accountRepository.save(signupForm.createAccount());
         Person person = signupForm.createPerson(account);

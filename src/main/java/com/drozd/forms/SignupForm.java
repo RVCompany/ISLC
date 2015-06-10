@@ -8,6 +8,8 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
+import static com.drozd.persistence.models.Account.ROLE_USER;
+
 public class SignupForm {
 
     private static final String NOT_BLANK_MESSAGE = "{notBlank.message}";
@@ -71,7 +73,7 @@ public class SignupForm {
     }
 
     public Account createAccount() {
-        return new Account(getEmail(), getPassword(), "ROLE_USER");
+        return new Account(getEmail(), getPassword(), ROLE_USER);
     }
 
     public Person createPerson(Account account) {
